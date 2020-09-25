@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/error', errorRouter);
-app.use('/image', imageRouter);
+app.use('/images', imageRouter);
 
 if (!module.parent) {
   app.listen(port);
