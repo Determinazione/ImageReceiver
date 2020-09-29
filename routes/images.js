@@ -26,16 +26,15 @@ const imageModel = require('../models/image');
 // Retrives the image file
 router.get('/download/', function(req, res) {
     console.log(`GET method ${req.url}`);
-    /*const data = imageModel.findById(req.params.id)
-    .then(data => res.render('app', { items: data }))
+    /*imageModel.find({})
+    .then(items => res.render('app', { items: items }))
     .catch(err => res.json({ message: err }));*/
-    imageModel.find({}, (err, items) => {
+    imageModel.find({}, function(err, docs) {
         if (err) {
-            console.log(err);
+            console.log("kkkk");
+            return;
         }
-        else {
-            res.render('app', { items: items });
-        }
+        res.render('app', { items: docs });
     })
 });
 
@@ -52,7 +51,7 @@ router.post('/upload', upload.single('image'), function(req, res) {
        }
     });
     imageModel.create(data)
-    .then(data => res.redirect('/'))
+    .then(item => res.redirect('/'))
     .catch(err => res.json({ message: err }));
 });  
 module.exports = router;

@@ -1,0 +1,41 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Image Uploading</title> 
+</head> 
+<body> 
+    <h1>Uploading image to mongoDB</h1> 
+    <hr> 
+    <div> 
+        <form action="/" method="POST" enctype="multipart/form-data"> 
+            <label for="guildid">Guild Id:</label>
+            <input type="text" id="guildid" name="guildId" value="" required><br>
+            <label for="serverid">Server Id:</label>
+            <input type="text" id="serverid" name="serverId" value="" required><br>
+            <label for="hashvalue">Hash Value:</label><br>
+            <textarea id="hashvalue" name="hashValue" value="" rows="2" required></textarea>
+            <label for="image">Upload Image</label><br>
+            <input type="file" id="image" name="image" value="" required><br>
+            <button type="submit" formaction="/images/upload">Submit</button> 
+        </form> 
+    </div> 
+    <hr> 
+    <h2>Uplaoded Images</h2> 
+    <div> 
+        <% items.forEach(function(image) { %> 
+        <div> 
+            <div> 
+                <img src="data:image/<%=image.image.contentType%>;base64,
+                    <%=image.image.data.toString('base64')%>">
+                <div> 
+                    <h5><%= image.name %></h5> 
+                    <p><%= image.desc %></p> 
+                </div> 
+            </div> 
+        </div> 
+        <% }) %> 
+    </div> 
+</body> 
+</html> 
