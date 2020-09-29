@@ -19,7 +19,7 @@ router.use(function(req, res, next) {
     res.status(404);
     res.format({
         html: function() {
-            res.render('404', { url: req.url });
+            res.render('errors/404', { url: req.url });
         },
         json: function() {
             res.json({ error: 'Not found' })
@@ -33,7 +33,7 @@ router.use(function(req, res, next) {
 // Error handling
 router.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('500', { error: err });
+    res.render('errors/500', { error: err });
 });
 
 module.exports = router;
