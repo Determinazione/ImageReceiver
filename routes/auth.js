@@ -1,13 +1,17 @@
 const router = require('express').Router();
 const userModel = require('../models/user');
+const {registerValidation} = require('../models/validation')
 
 router.get('/signup/', function(req, res) {
     res.render('signUp');
-})
+});
+
 router.post('/register', function (req, res) {
+    const error = registerValidation(req.body);
+    if (error) res.status(400).send(error);
     const data = new userModel({
-        name: req.body.name,
         email: req.body.email,
+        name: req.body.name,
         password: req.body.password
     });
     userModel.create(data)
