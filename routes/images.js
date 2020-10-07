@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const express = require('express');
 const multer = require('multer');
-const router = express.Router();
+const router = require('express').Router();
+
 const storage = multer.diskStorage({
     destination: function(req, file, callback) {
         callback(null, 'uploads/');
@@ -52,6 +52,6 @@ router.post('/upload', upload.single('image'), function(req, res) {
     });
     imageModel.create(data)
     .then(item => res.redirect('/'))
-    .catch(err => res.json({ message: err }));
+    .catch(err => res.status(400).json({ message: err }));
 });  
 module.exports = router;
